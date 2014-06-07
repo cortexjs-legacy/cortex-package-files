@@ -1,0 +1,28 @@
+{
+  "name": "cortex-package-files",
+  "version": "0.1.0",
+  "description": "cortex-package-files",
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/cortexjs/cortex-package-files.git"
+  },
+  "keywords": [
+    "cortex-package-files"
+  ],
+  "engines": { 
+    "node": ">=0.11.0"
+  },
+  "author": "kael",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/cortexjs/cortex-package-files/issues"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "chai": "*"
+  }
+}
