@@ -4,6 +4,8 @@ module.exports = pf;
 
 var glob = require('glob');
 var ignore = require('ignore');
+var node_path = require('path');
+var util = require('util');
 
 var SUPPORTED_DIRECTORIES = [
   'src'
@@ -30,8 +32,7 @@ function pf (options, callback) {
       return callback(err);
     }
 
-    var pkg = options.pkg;
-    var filter = pf._create_filter(pkg);
+    var filter = pf._create_filter(options);
 
     var REGEX_ENDS_BACKSLASH = /\/$/;
     files = files
@@ -43,20 +44,25 @@ function pf (options, callback) {
 
     callback(null, files);
   });
-};
+}
 
-pf._create_filter = function (pkg, more) {
+pf._create_filter = function (options) {
+  var pkg = options.pkg;
+  var cwd = options.cwd;
   var ignore_rules = pkg.ignores || [];
-  var ignore_file = ignore.select([
+  var ignore_files = [
         '.cortexignore',
         '.gitignore'
-      ]);
-  
+      ].map(function (file) {
+        return node_path.join(cwd, file);
+      });
+  var ignore_file = ignore.select(ignore_files);
+
   var ig = ignore()
     .addIgnoreFile(ignore_file)
     .addPattern(ignore_rules);
 
-  if (more) {
+  if (options.more) {
     ig
       // Which is needed by cortex,
       // or there will be errors if install
@@ -71,6 +77,7 @@ pf._create_filter = function (pkg, more) {
     'node_modules/',
 
     // You could never ignore this.
+    '!package.json',
     '!cortex.json',
     '!cortex-shrinkwrap.json',
     '!README.*'
@@ -104,13 +111,22 @@ pf._directories_pattern = function (pkg) {
 };
 
 
-pf._css_pattern = function (ig, pkg) {
+pf._css_pattern = function (pkg) {
   var include_css = pkg.css
-    ? include_css.map(function (css) {
+    ? pf._to_array(pkg.css).map(function (css) {
         // './abc.css' -> 'abc.css'
-        return node_path.join('.', css);
+        return '!' + node_path.join('.', css);
       })
     : [];
 
   return include_css;
 };
+
+
+pf._to_array = function (subject) {
+  return util.isArray(subject)
+    ? subject
+    : subject === undefined
+      ? []
+      : [subject];
+}
