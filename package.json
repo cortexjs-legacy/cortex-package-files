@@ -1,19 +1,23 @@
 {
   "name": "cortex-package-files",
-  "version": "0.1.0",
-  "description": "cortex-package-files",
+  "version": "0.1.1",
+  "description": "Get all files that cortex needs inside a repo.",
   "main": "index.js",
   "scripts": {
-    "test": "make test"
+    "test": "node test/cortex-package-files.js"
   },
   "repository": {
     "type": "git",
     "url": "git://github.com/cortexjs/cortex-package-files.git"
   },
   "keywords": [
-    "cortex-package-files"
+    "cortex",
+    "package",
+    "files",
+    "glob",
+    "ignore"
   ],
-  "engines": { 
+  "engines": {
     "node": ">=0.11.0"
   },
   "author": "kael",
@@ -22,7 +26,12 @@
     "url": "https://github.com/cortexjs/cortex-package-files/issues"
   },
   "devDependencies": {
-    "mocha": "*",
-    "chai": "*"
+    "fs-sync": "~0.2.4",
+    "cortex-playground": "~0.1.1",
+    "read-cortex-json": "~1.0.1"
+  },
+  "dependencies": {
+    "glob": "~4.0.2",
+    "ignore": "~2.2.13"
   }
 }
