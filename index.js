@@ -31,7 +31,7 @@ function pf (options, callback) {
     }
 
     var pkg = options.pkg;
-    var filter = package_files._create_filter(pkg);
+    var filter = pf._create_filter(pkg);
 
     var REGEX_ENDS_BACKSLASH = /\/$/;
     files = files
@@ -47,14 +47,13 @@ function pf (options, callback) {
 
 pf._create_filter = function (pkg, more) {
   var ignore_rules = pkg.ignores || [];
-
-  var ig = ignore()
-    .addIgnoreFile(
-      ignore.select([
+  var ignore_file = ignore.select([
         '.cortexignore',
         '.gitignore'
-      ])
-    )
+      ]);
+  
+  var ig = ignore()
+    .addIgnoreFile(ignore_file)
     .addPattern(ignore_rules);
 
   if (more) {
