@@ -8,7 +8,8 @@ var node_path = require('path');
 var util = require('util');
 
 var SUPPORTED_DIRECTORIES = [
-  'src'
+  'src',
+  'dist'
 ];
 
 // Get the file list to be packaged
