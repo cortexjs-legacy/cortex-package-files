@@ -28,7 +28,7 @@ p.copy(function (err, dir) {
       pkg: json
     }, function (err, files) { console.log('p files', files)
       assert.equal(err, null, 'fail to get cortex files');
-      assert.ok(exists('.gitignore', files), 'should include dot file');
+      assert.ok(exists('.cortexignore', files), 'should include dot file');
       assert.ok(noexists('style.css', files), 'should not include style.css');
       assert.ok(noexists('unnecessary.js', files), 'should not include unnecessary.js');
       assert.ok(noexists('src/a.swf', files), 'should not include src/a.swf');
@@ -54,7 +54,7 @@ p2.copy(function (err, dir) {
       more: true
     }, function (err, files) { console.log('p2 files', files)
       assert.equal(err, null, 'fail to get cortex files');
-      assert.ok(exists('.gitignore', files), 'should include dot file');
+      assert.ok(exists('.cortexignore', files), 'should include dot file');
       // has no pkg.css
       assert.ok(exists('style.css', files), 'should include style.css');
       assert.ok(noexists('unnecessary.js', files), 'should not include unnecessary.js');
