@@ -1,6 +1,6 @@
 {
   "name": "cortex-package-files",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Get all files that cortex needs inside a repo.",
   "main": "index.js",
   "scripts": {

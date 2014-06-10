@@ -60,6 +60,12 @@ pf._create_filter = function (options) {
   var ignore_file = ignore.select(ignore_files);
 
   var ig = ignore()
+    .addPattern([
+      // Always ignored
+      'neurons/',
+      // cortexjs/cortex#297: by default, we will ignore 'node_modules' directory
+      'node_modules/'
+    ])
     .addIgnoreFile(ignore_file)
     .addPattern(ignore_rules);
 
@@ -72,11 +78,6 @@ pf._create_filter = function (options) {
   }
 
   ig.addPattern([
-    // Always ignored
-    'neurons/',
-    // cortexjs/cortex#297: by default, we will ignore 'node_modules' directory
-    'node_modules/',
-
     // You could never ignore this.
     '!package.json',
     '!cortex.json',
