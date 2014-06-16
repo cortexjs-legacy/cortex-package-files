@@ -78,7 +78,7 @@ pf._create_filter = function (options) {
   }
 
   ig.addPattern([
-    // #2, cortex needn't package.json
+    // #2, cortex needn't package.json, however we will not positively ignore `package.json`
     // '!/package.json',
 
     // You could never ignore this.
