@@ -79,10 +79,10 @@ pf._create_filter = function (options) {
 
   ig.addPattern([
     // You could never ignore this.
-    '!package.json',
-    '!cortex.json',
-    '!cortex-shrinkwrap.json',
-    '!README.*'
+    '!/package.json',
+    '!/cortex.json',
+    '!/cortex-shrinkwrap.json',
+    '!/README.*'
   ]);
 
   return ig.createFilter();
@@ -104,7 +104,7 @@ pf._directories_pattern = function (pkg) {
       }
       // Make sure the path pattern consisted with the glob result.
       var dir = node_path.join('.', directories[key]);
-      var ignore_negative = '!' + dir.replace(/\/$/, '') + '/*';
+      var ignore_negative = '!/' + dir.replace(/\/$/, '') + '/*';
       return ignore_negative;
     })
     .filter(Boolean);
@@ -117,7 +117,7 @@ pf._css_pattern = function (pkg) {
   var include_css = pkg.css
     ? pf._to_array(pkg.css).map(function (css) {
         // './abc.css' -> 'abc.css'
-        return '!' + node_path.join('.', css);
+        return '!/' + node_path.join('.', css);
       })
     : [];
 
