@@ -78,8 +78,10 @@ pf._create_filter = function (options) {
   }
 
   ig.addPattern([
+    // #2, cortex needn't package.json
+    // '!/package.json',
+
     // You could never ignore this.
-    '!/package.json',
     '!/cortex.json',
     '!/cortex-shrinkwrap.json',
     '!/README.*'
