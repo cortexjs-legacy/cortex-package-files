@@ -56,20 +56,30 @@ p2.copy(function (err, dir) {
       'node_modules/a/c/d/f/README.md'
     ];
 
-    // #1
-    node_module_files.forEach(function (path) {
+    function write (path) {
       var file = node_path.join(dir, path);
       fss.write(file, '');
-    });
+    }
+
+    // #1
+    node_module_files.forEach(write);
+
+    write('xxxxx.xxx');
+    write('xxxxx/xxxxx.xxx');
 
     pf({
       cwd: dir,
       pkg: json,
-      more: true
+      more: true,
+      ignore: '/xxxxx.xxx'
+
     }, function (err, files) { console.log('p2 files', files)
       node_module_files.forEach(function (file) {
         assert.ok(noexists(file, files), 'should exclude node_modules');
       });
+
+      assert.ok(noexists('xxxxx.xxx', files), 'should not include xxxxx.json');
+      assert.ok(exists('xxxxx/xxxxx.xxx', files), 'should include xxxxx/xxxxx.json');
 
       assert.equal(err, null, 'fail to get cortex files');
       assert.ok(exists('.cortexignore', files), 'should include dot file');

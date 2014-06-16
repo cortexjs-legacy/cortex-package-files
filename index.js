@@ -16,7 +16,8 @@ var SUPPORTED_DIRECTORIES = [
 // @param {Object} options
 // - cwd: {path}
 // - pkg: {Object} package object
-// - more: {Boolean} include special files according to package data
+// - more: {Boolean} include special files according to package data,
+// - ignore: {Array|string} Array of ignore rules.
 function pf (options, callback) {
   var cwd = options.cwd;
 
@@ -65,7 +66,13 @@ pf._create_filter = function (options) {
       'neurons/',
       // cortexjs/cortex#297: by default, we will ignore 'node_modules' directory
       'node_modules/'
-    ])
+    ]);
+
+  if (options.ignore) {
+    ig.addPattern(options.ignore);
+  }
+  
+  ig
     .addIgnoreFile(ignore_file)
     .addPattern(ignore_rules);
 
