@@ -35,7 +35,7 @@ p.copy(function (err, dir) {
       assert.ok(noexists('src/a.swf', files), 'should not include src/a.swf');
       assert.ok(exists('README.md', files), 'should always include README.md');
       assert.ok(exists('cortex.json', files), 'should always include cortex.json');
-      assert.ok(exists('package.json', files), 'should always include package.json');
+      assert.ok(noexists('package.json', files), 'not always include package.json');
     });
   });
 });
