@@ -54,6 +54,7 @@ pf._create_filter = function (options) {
   var ignore_rules = pkg.ignores || [];
   var ignore_files = [
         '.cortexignore',
+        '.npmignore',
         '.gitignore'
       ].map(function (file) {
         return node_path.join(cwd, file);
